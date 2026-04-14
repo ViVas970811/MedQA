@@ -1,0 +1,44 @@
+app:
+  name: "MedQA"
+  version: "1.0.0"
+  environment: "development"
+  debug: false
+
+llm:
+  provider: "groq"
+  intent_model: "llama-3.3-70b-versatile"
+  generation_model: "llama-3.1-8b-instant"
+  symptom_model: "llama-3.1-8b-instant"
+  temperature: 0.0
+  max_retries: 3
+  retry_delay: 0.5
+  rate_limit_delay: 0.15
+
+embeddings:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  dimension: 384
+  batch_size: 128
+
+retrieval:
+  top_k: 5
+  index_type: "flat_l2"
+
+data:
+  corpus_path: "data/corpus.json"
+  labels_path: "data/labels.json"
+
+evaluation:
+  sample_size: 30
+  random_state: 42
+  test_size: 0.3
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins:
+    - "http://localhost:8501"
+    - "http://localhost:3000"
+
+logging:
+  level: "INFO"
+  format: "json"
